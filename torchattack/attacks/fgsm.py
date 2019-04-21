@@ -37,10 +37,10 @@ class FGSMAttack(BaseAttack):
 
         perturbed_x = x + delta
         y = self.model(perturbed_x if perturbed_x.shape[1] == 3 else perturbed_x.repeat(1, 3, 1, 1))
-        loss = criterion(y, t)
+        loss = self.criterion(y, t)
         grad_delta = grad(loss, delta)[0].detach()
 
-        if p == -1:
+        if self.p == -1:
             delta.data = eps * grad_delta.sign()
         else:
             raise NotImplementedError
