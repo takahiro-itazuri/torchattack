@@ -12,7 +12,7 @@ class BaseAttack(ABC):
         mean (sequence): Sequence of means for each channel.
         std (sequence): Sequence of standard deviations for each channel.
     """
-    def init(self, model, criterion=nn.CrossEntropyLoss(), mean=None, std=None):
+    def __init__(self, model, criterion=nn.CrossEntropyLoss(), mean=None, std=None):
         self.model = model
         self.criterion = criterion
         self.mean = mean if torch.is_tensor(mean) else torch.tensor(mean)
