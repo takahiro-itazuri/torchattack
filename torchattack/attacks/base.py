@@ -70,7 +70,7 @@ class BaseAttack(ABC):
         Returns:
             bool: True if the input is a tensor image, False otherwise.
         """
-        return torch.is_tensor(x) and x.ndimension == 4
+        return torch.is_tensor(x) and x.dim() == 4
 
     def _scale(self, x):
         """ Scale the input value ``x`` based on the ``self.std``.
@@ -81,4 +81,4 @@ class BaseAttack(ABC):
         Returns:
             torch.Tensor: Scaled input.
         """
-        return torch.tensor([x]).expand_as(std) / std
+        return torch.tensor([x]).expand_as(self.std) / self.std
