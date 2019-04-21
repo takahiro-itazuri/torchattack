@@ -15,7 +15,7 @@ setup(
     url="https://github.com/takahiro-itazuri/torchattack",
     author="Takahiro Itazuri",
     author_email="takahiro.lab.1226@gmail.com",
-    packages=find_packages(),
+    packages=find_packages("torchattack"),
     include_package_data=True,
     license="MIT"
 )
