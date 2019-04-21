@@ -41,7 +41,10 @@ class FGSMAttack(BaseAttack):
         grad_delta = grad(loss, delta)[0].detach()
 
         if self.p == -1:
-            delta.data = eps * grad_delta.sign()
+            delta = eps * grad_delta.sign()
+        elif self.p >= 1:
+            grad_delta_norm = self._calc_norm(grad_delta)
+            delta = eps * grad_delta / grad_delta_norm
         else:
             raise NotImplementedError
         
