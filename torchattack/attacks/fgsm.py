@@ -35,8 +35,8 @@ class FGSMAttack(BaseAttack):
         eps = self.eps.to(device)
         delta = torch.zeros_like(x, requires_grad=True).to(device)
 
-        perturbed_x = x + delta
-        y = self.model(perturbed_x if perturbed_x.shape[1] == 3 else perturbed_x.repeat(1, 3, 1, 1))
+        x_adv = x + delta
+        y = self.model(x_adv if x_adv.shape[1] == 3 else x_adv.repeat(1, 3, 1, 1))
         loss = self.criterion(y, t)
         grad_delta = grad(loss, delta)[0].detach()
 
