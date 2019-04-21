@@ -15,13 +15,13 @@ class FGSMAttack(BaseAttack):
         criterion (torch.nn.Module): Criterion to calculate loss.
         mean (sequence): Sequence of means for each channel.
         std (sequence): Sequence of standard deviations for each channel.
-        eps (float): Perturbation size (before normalization).
         p (int): Order of norm (-1 means infty norm).
+        eps (float): Perturbation size (before normalization).
     """
-    def __init__(self, model, criterion=nn.CrossEntropyLoss(), mean=None, std=None, eps=0.3, p=-1):
+    def __init__(self, model, criterion=nn.CrossEntropyLoss(), mean=None, std=None, p=-1, eps=5.0/255.0):
         BaseAttack.__init__(self, model, criterion, mean, std)
-        self.eps = self._scale(eps)[None, :, None, None]
         self.p = p
+        self.eps = self._scale(eps)[None, :, None, None]
 
     def attack(self, x, t):
         """Given pais of (``x``, ``t``), returns adversarial examples.
