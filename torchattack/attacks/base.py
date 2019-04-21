@@ -82,3 +82,15 @@ class BaseAttack(ABC):
             torch.Tensor: Scaled input.
         """
         return torch.tensor([x]).expand_as(self.std) / self.std
+
+    def _calc_norm(self, x, p=2):
+        """Calculater Lp norm
+
+        Args:
+            x (torch.Tensor): Input tensor (N, C, H, W)
+            p (int): Order of norm
+
+        Returns:
+            torch.Tensor: Lp norm of input (N, 1, 1, 1)
+        """
+        return x.view(x.size(0), -1).norm(p=p, dim=1)[:, None, None, None]
