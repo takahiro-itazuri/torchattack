@@ -5,7 +5,7 @@ from torchvision import models, datasets, transforms
 
 from torchattack.attacks import FGSMAttack
 
-model = models.alexnet(pretrained=True).eval()
+model = models.resnet18(pretrained=True).eval()
 
 mean = [0.485, 0.456, 0.406]
 std = [0.229, 0.224, 0.225]
