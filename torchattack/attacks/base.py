@@ -31,7 +31,7 @@ class BaseAttack(ABC):
         Returns:
             torch.Tensor: Clamped input tensor.
         """
-        return self.normalize(self.unnormalize(x).clamp(min=0.0, max=1.0))
+        return self._normalize(self._unnormalize(x).clamp(min=0.0, max=1.0))
 
     def _normalize(self, x):
         """Normalize batch of samples.
